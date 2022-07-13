@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Alert } from "react-native";
 
 import { Header } from "../components/Header";
 import { Task, TasksList } from "../components/TasksList";
@@ -9,13 +9,19 @@ export function Home() {
   const [tasks, setTasks] = useState<Task[]>([]);
 
   function handleAddTask(newTaskTitle: string) {
+    const taskExist = tasks.find((task) => task.title === newTaskTitle);
+
+    if (taskExist) {
+      Alert.alert("Erro", "Você não pode criar uma tarefa que já existe");
+      return;
+    }
+
     const newTask = {
       id: new Date().getTime(),
       title: newTaskTitle,
       done: false,
     };
 
-    // setTasks([...tasks, newTask]);
     setTasks((oldTasks) => [...oldTasks, newTask]);
   }
 
