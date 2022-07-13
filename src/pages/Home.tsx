@@ -12,7 +12,10 @@ export function Home() {
     const taskExist = tasks.find((task) => task.title === newTaskTitle);
 
     if (taskExist) {
-      Alert.alert("Erro", "Você não pode criar uma tarefa que já existe");
+      Alert.alert(
+        "Task já cadastrada",
+        "Você não pode cadastrar uma task com o mesmo nome"
+      );
       return;
     }
 
